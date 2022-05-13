@@ -1,14 +1,15 @@
 //new login with React
-import React, { Component, useState, useCallback } from 'react';
+import React, { Component, useState, useCallback } from "react";
 import axios from "axios";
-import { setCookie } from 'nookies';
+import { setCookie } from "nookies";
+import { JwtTokenTypeConfiguration } from "aws-sdk/clients/kendra";
 
 export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // const data = {
-    //   email: this.email,
-    //   password: this.password,
+    //   email: "",
+    //   password: "",
     // };
 
     // axios
@@ -20,26 +21,31 @@ export default class Register extends Component {
     //     console.log(err);
     //   });
 
-    // With JWT 
+    // With JWT
     try {
-      const response = await axios.post('http://localhost:9000/.netlify/functions/Signup', {
-        email,
-        password,
-      })
-  
-      setCookie({ res }, 'jwt', response.data.jwt, {
+      const response = axios.post(
+        "http://localhost:9000/.netlify/functions/sign-up",
+        {
+          email: "",
+          password: "",
+        }
+      );
+
+      setCookie({ res }, "jwt", response.jwt, {
         httpOnly: true,
-        secure: process.env.NEXTAUTH_URL !== 'development',
-        
-        path: '../signin.js',
+        secure: env.NEXTAUTH_UR !== "development",
+
+        path: "./signin.js",
       });
-  
+
       res.status(200).end();
     } catch (e) {
-      res.status(400).send(e.response.data.message[0].messages[0]);
+      // e.status(400).send(e.response.message[0].messages[0]);
+      // consol.log("problem");
+      console.log("problem");
     }
   };
-
+  // };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
