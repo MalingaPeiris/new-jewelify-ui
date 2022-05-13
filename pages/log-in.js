@@ -7,43 +7,43 @@ import { JwtTokenTypeConfiguration } from "aws-sdk/clients/kendra";
 export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    // const data = {
-    //   email: "",
-    //   password: "",
-    // };
+    const data = {
+      email: "",
+      password: "",
+    };
 
-    // axios
-    //   .post("http://localhost:9000/.netlify/functions/sign-up", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    // With JWT
-    try {
-      const response = axios.post(
-        "http://localhost:9000/.netlify/functions/sign-up",
-        {
-          email: "",
-          password: "",
-        }
-      );
-
-      setCookie({ res }, "jwt", response.jwt, {
-        httpOnly: true,
-        secure: env.NEXTAUTH_UR !== "development",
-
-        path: "./signin.js",
+    axios
+      .post("http://localhost:9000/.netlify/functions/sign-up", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
 
-      res.status(200).end();
-    } catch (e) {
+    // With JWT
+    // try {
+    //   const response = axios.post(
+    //     "http://localhost:9000/.netlify/functions/sign-up",
+    //     {
+    //       email: "",
+    //       password: "",
+    //     }
+    //   );
+
+    //   setCookie({ res }, "jwt", response.jwt, {
+    //     httpOnly: true,
+    //     secure: env.NEXTAUTH_UR !== "development",
+
+    //     path: "./signin.js",
+    //   });
+
+    //   res.status(200).end();
+    // } catch (e) {
       // e.status(400).send(e.response.message[0].messages[0]);
       // consol.log("problem");
-      console.log("problem");
-    }
+    //   console.log("problem");
+    // }
   };
   // };
   render() {
